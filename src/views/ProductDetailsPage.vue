@@ -1,41 +1,58 @@
 <template>
-        <h1>Product {{ product }}</h1>
+  <div id="page-wrap">
+    <h1>Product {{ product.name }}</h1>
+    <div id="img-wrap">
+      <img v-bind:src="product.imageUrl" />
+    </div>
+    <div id="product-details">
+      <h3 id="price">${{ product.price }}</h3>
+      <p>Average rating: {{ product.averageRating }}</p>
+      <button id="add-to-cart">Add to Cart</button>
+      <h4>Description</h4>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
-
+import { products } from "../assets/fake-data";
 export default {
-    name: 'Products Details Page',
-}
+  name: "Products Details Page",
+  data() {
+    return {
+      product: products.find((p) => p.id === this.$route.params.id),
+    };
+  },
+};
 </script>
 
 <style scoped>
-  #page-wrap {
-    margin-top: 16px;
-    padding: 16px;
-    max-width: 600px;
-  }
+#page-wrap {
+  margin-top: 16px;
+  padding: 16px;
+  max-width: 600px;
+}
 
-  #img-wrap {
-    text-align: center;
-  }
+#img-wrap {
+  text-align: center;
+}
 
-  img {
-    width: 400px;
-  }
+img {
+  width: 400px;
+}
 
-  #product-details {
-    padding: 16px;
-    position: relative;
-  }
+#product-details {
+  padding: 16px;
+  position: relative;
+}
 
-  #add-to-cart {
-    width: 100%;
-  }
+#add-to-cart {
+  width: 100%;
+}
 
-  #price {
-    position: absolute;
-    top: 24px;
-    right: 16px;
-  }
+#price {
+  position: absolute;
+  top: 24px;
+  right: 16px;
+}
 </style>
